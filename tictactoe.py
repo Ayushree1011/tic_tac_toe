@@ -60,16 +60,17 @@ def checkdiag(board):
     
 def checktie(board):
     global gameRunning
-    if "-" not in board:
+    if "-" not in board and checkWin()==False:
         printBoard(board)
         print("It is a tie!")
         gameRunning = False
 
 def checkWin():
     if checkdiag(board) or checkHorizontal(board) or checkrow(board):
-        print(f"The winner is {winner}")
-
-
+        
+        return True
+    else:
+        return False
 #switch the player
 
 def switchPlayer():
@@ -95,5 +96,8 @@ while gameRunning:
     checktie(board)
     switchPlayer()
     computer(board)
-    checkWin()
+    if checkWin()==True:
+        printBoard(board)
+        print(f"The winner is {winner}")
+        gameRunning=False
     checktie(board)
